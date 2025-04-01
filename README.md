@@ -1,1 +1,0 @@
-# Bentark Hotel Menu
