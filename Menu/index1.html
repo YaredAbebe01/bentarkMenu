@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fauget Hotel Menu</title>
+    <style>
+        :root {
+            --primary-color: #ff6b00;
+            --secondary-color: #ffa500;
+            --accent-color: #ffcc00;
+            --dark-color: #333;
+            --light-color: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+            border: 2px solid white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Menu Containers */
+        .menu-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            display: inline-block;
+            padding: 0 1rem;
+            background-color: var(--light-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            z-index: 0;
+        }
+        
+        .menu-container {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .menu-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .sidebar {
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            letter-spacing: 2px;
+        }
+        
+        .content {
+            padding: 2rem;
+            flex: 1;
+        }
+        
+        .menu-category {
+            margin-bottom: 2rem;
+        }
+        
+        .menu-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .menu-title {
+            background-color: var(--accent-color);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            color: var(--dark-color);
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-item span:last-child {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .food-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            margin: 1rem auto;
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .menu-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                writing-mode: horizontal-tb;
+                padding: 1rem;
+                text-align: center;
+            }
+            
+            .food-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .menu-item {
+                flex-direction: column;
+            }
+            
+            .menu-item span:last-child {
+                margin-top: 0.25rem;
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="download (11).jpg" alt="Hotel Logo">
+                <span>Bentark Hotel</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#breakfast">Breakfast</a></li>
+                <li><a href="#cakes">Cakes</a></li>
+                <li><a href="#drinks">Drinks</a></li>
+                <li><a href="#lunch-dinner">Lunch & Dinner</a></li>
+                <li><a href="#noodles">Noodles</a></li>
+                <li><a href="#sushi">Sushi</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breakfast Section -->
+    <section id="breakfast" class="menu-section">
+        <div class="section-title">
+            <h2>Breakfast Menu</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Breakfast
+                <img src="download (8).jpg" alt="Breakfast" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Morning Specials</div>
+                    <div class="menu-item"><span>Pancake Stack</span> <span>$8.50</span></div>
+                    <div class="menu-item"><span>Avocado Toast</span> <span>$7.00</span></div>
+                    <div class="menu-item"><span>Eggs Benedict</span> <span>$9.50</span></div>
+                    <div class="menu-item"><span>French Toast</span> <span>$7.50</span></div>
+                    <div class="menu-item"><span>Breakfast Burrito</span> <span>$8.00</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Healthy Options</div>
+                    <div class="menu-item"><span>Acai Bowl</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Greek Yogurt Parfait</span> <span>$5.50</span></div>
+                    <div class="menu-item"><span>Oatmeal</span> <span>$4.50</span></div>
+                    <div class="menu-item"><span>Fruit Salad</span> <span>$5.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cakes Section -->
+    <section id="cakes" class="menu-section">
+        <div class="section-title">
+            <h2>Delicious Cakes</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Cakes
+                <img src="OIP (5).jpg" alt="Cakes" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Classic Cakes</div>
+                    <div class="menu-item"><span>Cheese Cake</span> <span>$5.00</span></div>
+                    <div class="menu-item"><span>Carrot Cake</span> <span>$7.00</span></div>
+                    <div class="menu-item"><span>Cherry Cake</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Chocolate Cake</span> <span>$6.00</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Specialty Cakes</div>
+                    <div class="menu-item"><span>Red Velvet</span> <span>$7.50</span></div>
+                    <div class="menu-item"><span>Tiramisu</span> <span>$8.00</span></div>
+                    <div class="menu-item"><span>Black Forest</span> <span>$7.50</span></div>
+                    <div class="menu-item"><span>Opera Cake</span> <span>$8.50</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Drinks Section -->
+    <section id="drinks" class="menu-section">
+        <div class="section-title">
+            <h2>Refreshing Drinks</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Drinks
+                <img src="download (10).jpg" alt="Drinks" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Hot Beverages</div>
+                    <div class="menu-item"><span>Espresso</span> <span>$3.00</span></div>
+                    <div class="menu-item"><span>Cappuccino</span> <span>$4.00</span></div>
+                    <div class="menu-item"><span>Latte</span> <span>$4.50</span></div>
+                    <div class="menu-item"><span>Hot Chocolate</span> <span>$3.50</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Cold Beverages</div>
+                    <div class="menu-item"><span>Iced Coffee</span> <span>$4.00</span></div>
+                    <div class="menu-item"><span>Fresh Lemonade</span> <span>$3.50</span></div>
+                    <div class="menu-item"><span>Smoothies</span> <span>$5.00</span></div>
+                    <div class="menu-item"><span>Iced Tea</span> <span>$3.00</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lunch & Dinner Section -->
+    <section id="lunch-dinner" class="menu-section">
+        <div class="section-title">
+            <h2>Lunch & Dinner</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Main Courses
+                <img src="download (11).jpg" alt="Main Courses" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Starters</div>
+                    <div class="menu-item"><span>Bruschetta</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Caesar Salad</span> <span>$7.50</span></div>
+                    <div class="menu-item"><span>Soup of the Day</span> <span>$5.50</span></div>
+                    <div class="menu-item"><span>Garlic Bread</span> <span>$4.50</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Main Courses</div>
+                    <div class="menu-item"><span>Grilled Salmon</span> <span>$16.00</span></div>
+                    <div class="menu-item"><span>Filet Mignon</span> <span>$24.00</span></div>
+                    <div class="menu-item"><span>Chicken Parmesan</span> <span>$14.50</span></div>
+                    <div class="menu-item"><span>Vegetable Risotto</span> <span>$12.50</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Noodles Section -->
+    <section id="noodles" class="menu-section">
+        <div class="section-title">
+            <h2>Noodle Dishes</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Noodles
+                <img src="download (8).jpg" alt="Noodles" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Asian Noodles</div>
+                    <div class="menu-item"><span>Egg Noodles</span> <span>$5.00</span></div>
+                    <div class="menu-item"><span>Rice Noodles</span> <span>$7.00</span></div>
+                    <div class="menu-item"><span>Soy Ginger</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Ramen Noodles</span> <span>$4.00</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Specialty Noodles</div>
+                    <div class="menu-item"><span>Soba Noodles</span> <span>$5.50</span></div>
+                    <div class="menu-item"><span>Chicken Noodles</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Beef Noodles</span> <span>$6.00</span></div>
+                    <div class="menu-item"><span>Seafood Noodles</span> <span>$7.50</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sushi Section -->
+    <section id="sushi" class="menu-section">
+        <div class="section-title">
+            <h2>Sushi Selection</h2>
+        </div>
+        <div class="menu-container">
+            <div class="sidebar">
+                Sushi
+                <img src="OIP (5).jpg" alt="Sushi" class="food-image">
+            </div>
+            <div class="content">
+                <div class="menu-category">
+                    <div class="menu-title">Traditional Sushi</div>
+                    <div class="menu-item"><span>Nigiri Sushi</span> <span>$5.00</span></div>
+                    <div class="menu-item"><span>Sashimi Sushi</span> <span>$7.00</span></div>
+                    <div class="menu-item"><span>Maki Sushi</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Uramaki Sushi</span> <span>$4.00</span></div>
+                </div>
+                <div class="menu-category">
+                    <div class="menu-title">Special Rolls</div>
+                    <div class="menu-item"><span>Temaki Sushi</span> <span>$5.50</span></div>
+                    <div class="menu-item"><span>Hamachi Sushi</span> <span>$6.50</span></div>
+                    <div class="menu-item"><span>Tiger Roll</span> <span>$6.00</span></div>
+                    <div class="menu-item"><span>Dragon Roll</span> <span>$7.50</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="contact-info">
+            <p>📞 +123-456-7890</p>
+            <p>✉️ info@bentarkhotel.com</p>
+        </div>
+        <p>© 2025 Bentark Hotel. All rights reserved.</p>
+    </footer>
+</body>
+</html>
